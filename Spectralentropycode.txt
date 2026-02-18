@@ -1,0 +1,31 @@
+from scipy.stats import entropy
+signal=input
+print(signal.shape)
+signalnew=librosa.stft(signal,n_fft=1024)
+print(signalnew.shape)
+base=2
+listofsignal=[]
+signalweuse=np.transpose(signalnew)
+removed=[]
+y=signalweuse.shape[0]
+print(y)
+
+for p in range(y):
+    
+    
+    stftsignalpower = (np.abs(signalweuse[p]))**2
+    newest=preprocessing.normalize([stftsignalpower])
+    entropyofthefinalsignal=entropy(newest[0],base=base)
+    listofsignal.append(entropyofthefinalsignal)
+
+time=np.linspace(0,3.0,y)
+print(listofsignal)
+
+
+time=np.linspace(0,3.0,y)
+plt.ylim(0,10)       
+plt.plot(time,listofsignal)
+   
+
+
+
